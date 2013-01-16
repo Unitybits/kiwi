@@ -1,0 +1,9 @@
+package de.appik.kiwi.util.font;
+
+import java.awt.Font;
+
+public interface FieldFont {
+
+	public Font getFont();
+	
+}

@@ -1,0 +1,15 @@
+package de.appik.kiwi.view.component.field;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
+public interface FieldView {
+
+	public JPanel getPanelField();
+	
+	public JTextArea getTextArea();
+
+	public JLabel getLabel();
+	
+}

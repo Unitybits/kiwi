@@ -1,0 +1,138 @@
+package de.appik.kiwi.view.component.menu;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JRadioButtonMenuItem;
+
+import static de.appik.kiwi.text.MenuValue.*;
+
+public class WindowMenuView implements MenuView {
+
+	private final JMenuBar menuBar = new JMenuBar();
+
+	private final Map<String, JMenuItem> menuItem = new HashMap<String, JMenuItem>();
+	
+	public WindowMenuView() {
+		createMenuBar();
+	}
+
+	public JMenuBar getMenuBar() {
+		return menuBar;
+	}
+
+	@Override
+	public Map<String, JMenuItem> getMenuItem() {
+		return menuItem;
+	}
+
+	
+	private void createMenuBar() {
+		createFile();
+		createWindow();
+		createHelp();
+	}
+
+	private void createFile() {
+		JMenu fileMenu = new JMenu("File");
+		fileMenu.setMnemonic('F');
+
+//		JMenuItem itemPrint = new JMenuItem(PRINT);
+//		itemPrint.setMnemonic('P');
+//		
+//		fileMenu.add(itemPrint);
+//		fileMenu.addSeparator();
+		
+		JMenuItem menuItemExit = new JMenuItem(EXIT);
+		menuItemExit.setMnemonic('x');
+		
+		fileMenu.add(menuItemExit);
+		
+//		menuItem.put(PRINT, itemPrint);
+		menuItem.put(EXIT, menuItemExit);
+		menuBar.add(fileMenu);
+	}
+	
+	private void createWindow() {
+		JMenu windowMenu = new JMenu(WINDOW);
+		windowMenu.setMnemonic('W');
+		
+//		windowMenu.add(itemMode());
+		windowMenu.add(itemStyle());
+//		windowMenu.addSeparator();
+//		windowMenu.add(itemPreference());
+		
+		menuBar.add(windowMenu);
+		
+	}
+
+	private JMenu itemMode(){
+		JMenu menuMode = new JMenu("Mode");
+		menuMode.setMnemonic('o');
+		
+		JMenuItem radioClassic = new JRadioButtonMenuItem(MODE_CLASSIC);
+		menuMode.add(radioClassic);
+		menuItem.put(MODE_CLASSIC, radioClassic);
+		
+		JMenuItem radioProf = new JRadioButtonMenuItem(MODE_PROF);
+		menuMode.add(radioProf);
+		menuItem.put(MODE_PROF, radioProf);
+		
+		ButtonGroup group = new ButtonGroup();
+		group.add(radioClassic);
+		group.add(radioProf);
+		
+		return menuMode;
+	}
+	
+	private JMenu itemStyle(){
+		JMenu menuStyle = new JMenu("Style");
+		menuStyle.setMnemonic('y');
+		
+		JMenuItem radioClassic = new JRadioButtonMenuItem(STYLE_APPIKWHITE);
+		menuStyle.add(radioClassic);
+		menuItem.put(STYLE_APPIKWHITE, radioClassic);
+		
+		JMenuItem radioAppikBlack = new JRadioButtonMenuItem(STYLE_APPIKBLACK);
+		menuStyle.add(radioAppikBlack);
+		menuItem.put(STYLE_APPIKBLACK, radioAppikBlack);
+		
+		JMenuItem radioAppikOrange = new JRadioButtonMenuItem(STYLE_APPIKORANGE);
+		menuStyle.add(radioAppikOrange);
+		menuItem.put(STYLE_APPIKORANGE, radioAppikOrange);
+
+		
+		ButtonGroup group = new ButtonGroup();
+		group.add(radioClassic);
+		group.add(radioAppikBlack);
+		group.add(radioAppikOrange);
+		
+		return menuStyle;
+	}
+	
+	private JMenuItem itemPreference(){
+		JMenuItem itemPreference = new JMenuItem(PREFERENCES);
+		itemPreference.setMnemonic('P');
+		menuItem.put(PREFERENCES, itemPreference);
+		
+		return itemPreference;
+	}
+	
+	
+	private void createHelp() {
+		JMenu helpMenu = new JMenu("Help");
+		helpMenu.setMnemonic('H');
+
+		JMenuItem itemAbout = new JMenuItem(ABOUT);
+		itemAbout.setMnemonic('b');
+		helpMenu.add(itemAbout);
+		
+		menuItem.put(ABOUT, itemAbout);
+		
+		menuBar.add(helpMenu);
+	}
+}

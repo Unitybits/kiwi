@@ -1,0 +1,15 @@
+package de.appik.kiwi.model.factory;
+
+import de.appik.kiwi.model.Model;
+import de.appik.kiwi.util.enums.Mode;
+
+
+abstract class ModelFactory {
+
+	public Model getModel(Mode mode){
+		return createModel(mode);
+	}
+	
+	protected abstract Model createModel(Mode mode);
+	
+}

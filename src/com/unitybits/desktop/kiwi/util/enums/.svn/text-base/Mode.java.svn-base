@@ -1,0 +1,7 @@
+package de.appik.kiwi.util.enums;
+
+public enum Mode {
+
+	CLASSIC, PROF
+	
+}

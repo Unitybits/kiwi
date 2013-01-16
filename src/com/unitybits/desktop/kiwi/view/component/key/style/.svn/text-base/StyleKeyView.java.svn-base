@@ -1,0 +1,17 @@
+package de.appik.kiwi.view.component.key.style;
+
+import de.appik.kiwi.view.component.key.KeyView;
+
+abstract class StyleKeyView implements KeyView {
+
+	private KeyView keyView;
+	
+	public StyleKeyView(KeyView keyView) {
+		this.keyView = keyView;
+	}
+
+	protected KeyView getKeyView() {
+		return keyView;
+	}
+
+}

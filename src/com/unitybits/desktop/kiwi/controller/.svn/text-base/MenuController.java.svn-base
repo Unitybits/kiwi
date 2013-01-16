@@ -1,0 +1,91 @@
+package de.appik.kiwi.controller;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JMenuItem;
+
+import de.appik.kiwi.model.Data;
+import de.appik.kiwi.model.Model;
+import de.appik.kiwi.util.AboutDialog;
+import de.appik.kiwi.util.PrintDialog;
+import de.appik.kiwi.view.View;
+
+import static de.appik.kiwi.text.MenuValue.*;
+
+class MenuController implements ActionListener {
+
+	private Model model;
+	private View view;
+
+	public MenuController(Business business) {
+		model = business.getModel();
+		view = business.getView();
+
+		for (JMenuItem item : view.getMenuItem().values()) {
+			item.addActionListener(this);
+		}
+
+		for (String menu : view.getMenuItem().keySet()) {
+			if (model.getMenus().get(menu) != null) {
+				view.getMenuItem().get(menu)
+						.setSelected(model.getMenus().get(menu));
+			}
+		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String menu = e.getActionCommand();
+
+		menuPrint(menu);
+		menuPreferences(menu);
+		menuExit(menu);
+		menuStyle(menu);
+		menuMode(menu);
+		menuAbout(menu);
+	}
+
+	private void menuPreferences(String menu) {
+		if (PREFERENCES.equals(menu)) {
+			System.out.println("preferences");
+		}
+	}
+
+	private void menuPrint(String menu) {
+		if (PRINT.equals(menu)) {
+			PrintDialog.getInstance().print("super geil");
+		}
+	}
+
+	private void menuExit(String menu) {
+		if (EXIT.equals(menu)) {
+			System.exit(0);
+		}
+	}
+
+	private void menuAbout(String menu) {
+		if (ABOUT.equals(menu)) {
+			AboutDialog.getInstance().customDialog();
+			AboutDialog.getInstance().setLocationRelativeTo(view.getFrame());
+		}
+	}
+
+	private void menuStyle(String menu) {
+		if (STYLE_APPIKWHITE.equals(menu) || STYLE_APPIKBLACK.equals(menu)
+				|| STYLE_APPIKORANGE.equals(menu)) {
+			Data.getInstance().saveStyle(null, menu);
+		}
+	}
+
+	private void menuMode(String menu) {
+		if (MODE_CLASSIC.equals(menu) || MODE_PROF.equals(menu)) {
+			Data.getInstance().saveStyle(menu, null);
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "MenuController [model=" + model + ", view=" + view + "]";
+	}
+}

@@ -1,0 +1,53 @@
+package de.appik.kiwi.controller;
+
+import de.appik.kiwi.model.Data;
+import de.appik.kiwi.model.Model;
+import de.appik.kiwi.util.enums.Mode;
+import de.appik.kiwi.view.View;
+
+public final class Business {
+
+	private static final Business instance = new Business();
+	
+	private View view;
+	private Model model;
+	private CalculationController con;
+	
+	private Business() {
+		
+	}
+	
+	public static Business getInstance() {
+		return instance;
+	}
+	
+	public View getView() {
+		return view;
+	}
+	
+	public Model getModel() {
+		return model;
+	}
+	
+	public CalculationController getCon() {
+		return con;
+	}
+	
+	public void startBusiness(View view){
+		this.view = view;
+		if (model == null) {
+			model = Data.getInstance().getModel(Mode.CLASSIC);
+		}
+		con = new CalculationController(this);
+		model.setObserver(view);
+		model.loadPreference();
+		
+		new MenuController(this);
+		
+	}
+	
+	@Override
+	public String toString() {
+		return "Business [view=" + view + "]";
+	}
+}

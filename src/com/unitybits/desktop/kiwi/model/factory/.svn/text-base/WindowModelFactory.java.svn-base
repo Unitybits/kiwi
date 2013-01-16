@@ -1,0 +1,32 @@
+package de.appik.kiwi.model.factory;
+
+import de.appik.kiwi.model.CalculationModel;
+import de.appik.kiwi.model.Model;
+import de.appik.kiwi.util.Log;
+import de.appik.kiwi.util.enums.Mode;
+
+
+public final class WindowModelFactory extends ModelFactory{
+	
+	/** Eager Load of the Singleton to stay atomic. */
+	private static final WindowModelFactory instance = new WindowModelFactory();
+	
+	private WindowModelFactory() {
+	}
+	
+	public static WindowModelFactory getInstance() {
+		return instance;
+	}
+	
+	@Override
+	protected Model createModel(Mode mode) {
+		if(mode == Mode.CLASSIC){
+			return new CalculationModel();
+		}else{
+			Log.LOG.warn("Model is not responsible!");
+		}
+		
+		return null;
+	}
+
+}

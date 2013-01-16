@@ -1,0 +1,6 @@
+package de.appik.kiwi.util.enums;
+
+public enum Style {
+
+	APPIKWHITE, APPIKBLACK
+}

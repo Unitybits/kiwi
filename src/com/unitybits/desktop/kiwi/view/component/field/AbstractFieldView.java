@@ -1,0 +1,74 @@
+/**
+ * Unitybits. All rights reserved.
+ * 
+ * www.unitybits.com
+ */
+
+package com.unitybits.desktop.kiwi.view.component.field;
+
+import java.awt.Font;
+import java.awt.GridLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.border.Border;
+
+/**
+ * 
+ * @author rosc
+ */
+public abstract class AbstractFieldView implements FieldView{
+
+	protected Border border = BorderFactory.createEmptyBorder(10, 10, 10, 10);
+	protected Font font = new Font(null, Font.BOLD, 18);
+
+	
+	protected final JPanel panelField;
+	protected final JTextArea textArea;
+	protected final JLabel labelField;
+	
+	public AbstractFieldView() {
+		panelField = new JPanel(new GridLayout(2, 1));
+		textArea = new JTextArea(2, 20);
+		labelField = new JLabel();
+		
+		defaultStyleField();
+	}
+	
+	@Override
+	public JPanel getPanelField() {
+		return panelField;
+	}
+
+	@Override
+	public JTextArea getTextArea() {
+		return textArea;
+	}
+
+	@Override
+	public JLabel getLabel() {
+		return labelField;
+	}
+
+	private void defaultStyleField(){
+		textArea.setBorder(border);
+		textArea.setFont(font);
+		
+		JScrollPane scrollPane = new JScrollPane(textArea,
+				JScrollPane.VERTICAL_SCROLLBAR_NEVER,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setBorder(BorderFactory.createEmptyBorder());
+		panelField.add(scrollPane);
+	
+		labelField.setOpaque(true);
+		labelField.setBorder(border);
+		labelField.setFont(font);
+		labelField.setHorizontalAlignment(JLabel.RIGHT);
+		panelField.add(labelField);
+
+	
+	}
+}

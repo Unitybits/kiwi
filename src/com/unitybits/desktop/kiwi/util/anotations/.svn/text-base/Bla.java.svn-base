@@ -1,0 +1,7 @@
+package de.appik.kiwi.util.anotations;
+
+public @interface Bla {
+
+	String getName();
+	
+}

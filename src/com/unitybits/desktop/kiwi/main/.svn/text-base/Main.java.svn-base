@@ -1,0 +1,36 @@
+package de.appik.kiwi.main;
+
+import java.lang.reflect.InvocationTargetException;
+
+import javax.swing.SwingUtilities;
+
+import de.appik.kiwi.util.Log;
+
+/**
+ * This abstract class is the entry point of the application. It defines
+ * the main method to start the program. Also it uses the facade 
+ * abstraction design pattern to encapsulate the system.
+ */
+abstract class Main {
+	
+	public static void main(String[] args) {
+		
+		try {
+			SwingUtilities.invokeAndWait(new Runnable() {
+				
+				@Override
+				public void run() {
+					Log.LOG.info("Start Program!");
+					StartMain.getInstance().startMain();
+				}
+			});
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	protected abstract void startMain();
+}

@@ -1,0 +1,22 @@
+package de.appik.kiwi.main;
+
+import de.appik.kiwi.controller.Business;
+import de.appik.kiwi.view.StoreView;
+
+final class StartMain extends Main{
+
+	private static final StartMain instance = new StartMain();
+	
+	private StartMain() {
+	}
+	
+	public static StartMain getInstance() {
+		return instance;
+	}
+	
+	@Override
+	protected void startMain() {
+		Business.getInstance().startBusiness(new StoreView());
+		
+	}
+}

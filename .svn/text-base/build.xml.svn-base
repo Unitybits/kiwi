@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+
+<project name="kiwi" default="compress">
+
+	<property name="version.num" value="1.0.0"/>
+	<property name="user.name" value="www.appik.de"/>
+	<property name="main.class" value="de.appik.kiwi.main.Main"/>
+	
+	<target name="folder" depends="clean">
+		<mkdir dir="build/classes" />
+		<mkdir dir="dist" />
+	</target>
+
+	<target name="manifest">
+	<manifest file="MANIFEST.MF">
+		<attribute name="Built by" value="user.name"/>
+		<attribute name="Main-Class"/>
+	</manifest>
+	
+	</target>
+	
+	<target name="compile" depends="folder">
+		<javac srcdir="src" destdir="build/classes" includes="**/*.jar">
+		</javac>
+		<echo>Compile kiwi project complete!</echo>
+	</target>
+
+	<target name="compress" depends="compile">
+		<jar destfile="/home/rschip/Desktop/kiwi.jar" includes="**/*.class"  />
+		<echo>Building kiwi.jar file complete!</echo>
+	</target>
+
+	
+	<target name="execute" depends="compile">
+		<java classname="de.appik.kiwi.main.Main" classpath="build/classes">
+		</java>
+	</target>
+
+	<target name="clean">
+		<delete dir="build" />
+		<delete dir="dist" />
+	</target>
+
+
+</project>
